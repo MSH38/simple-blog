@@ -59,6 +59,9 @@ class AuthController extends Controller
             }
 
             $user = Auth::user();
+            $newToken = JWTAuth::fromUser($user);
+            $user->token = $newToken;
+            $user->save();
             return $this->customResponse(compact('user'), 200, ['message' => 'Login successful']);
         } catch (\Exception $e) {
             return $this->customResponse($e->getMessage(), 500);
@@ -69,6 +72,9 @@ class AuthController extends Controller
     {
         try {
             Auth::logout();
+            JWTAuth::invalidate(JWTAuth::getToken());
+            // $user->token = null;
+            // $user->save();
             return $this->customResponse('Successfully logged out', 200);
         } catch (\Exception $e) {
             return $this->customResponse($e->getMessage(), 500);

@@ -1,0 +1,317 @@
+{
+	"info": {
+		"_postman_id": "42b812ac-6170-4ebe-8a8a-d22980c1a74c",
+		"name": "simple plog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "22709533"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "mahmoud2@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Password@123",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{url}}/login"
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "{{url}}/logout"
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "mahmoud",
+									"description": "'required , string , max:255'",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "mahmoud2@gmail.com",
+									"description": "'required , string , email , max:255 , unique:users'",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Password@123",
+									"description": "required , string , min:8 , contain characters (small and capital ) numbers and special character for example  \"Password@123\"",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "Password@123",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{url}}/register"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "posts",
+			"item": [
+				{
+					"name": "all posts of all users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "{{url}}/all-posts"
+					},
+					"response": []
+				},
+				{
+					"name": "get user posts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "{{url}}/posts"
+					},
+					"response": []
+				},
+				{
+					"name": "create post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "post3",
+									"description": "required|string|max:255",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "content of post 3",
+									"description": "required|string",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{url}}/posts"
+					},
+					"response": []
+				},
+				{
+					"name": "update post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "post1",
+									"description": "required|string|max:255",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "content of post 1",
+									"description": "required|string",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/posts/2?title=post 1 update 3555&content=content of post 1 update 3555",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"posts",
+								"2"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "post 1 update 3555"
+								},
+								{
+									"key": "content",
+									"value": "content of post 1 update 3555"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "post1",
+									"description": "required|string|max:255",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "content of post 1",
+									"description": "required|string",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{url}}/posts/2"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://127.0.0.1:8000/api",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzI1NTU0NDY0LCJleHAiOjE3MjU1NTgwNjQsIm5iZiI6MTcyNTU1NDQ2NCwianRpIjoid1VXNUFrUHJVVDF1NUtYbiIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.JE22_qtQsI1VBhlEiWwbdl2Tg9fuTzW2_HMCbPCIjg0",
+			"type": "string"
+		}
+	]
+}
